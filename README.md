@@ -100,6 +100,9 @@ my_project/
 ## Database ER Diagram
 ![architecture](https://github.com/user-attachments/assets/1657a758-d8bf-4eb0-893a-4f815d3a0e7a)
 
+![Uploading database_schema.drawio.png…]()
+
+
 
 (Include your ER diagram image here if available.)
 
