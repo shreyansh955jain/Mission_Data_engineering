@@ -143,7 +143,6 @@ Screen_shots For refrence:-
 ![Screenshot from 2025-04-03 10-32-42](https://github.com/user-attachments/assets/e8aa9189-953b-45c2-b10d-77e920da9d54)
 
 
-![Screenshot from 2025-04-03 10-32-58](https://github.com/user-attachments/assets/67f4671d-4897-448a-b6e7-ae06483e3b7f)
 
 ![Screenshot from 2025-04-03 10-34-27](https://github.com/user-attachments/assets/d28e74eb-f71a-419d-85b0-3fc043c7f438)
 
