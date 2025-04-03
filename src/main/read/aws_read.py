@@ -7,6 +7,7 @@ class S3Reader:
     def list_files(self, s3_client, bucket_name,folder_path):
         try:
             response = s3_client.list_objects_v2(Bucket=bucket_name,Prefix=folder_path)
+            # print(f"(',') (',') response --> {response}")
             if 'Contents' in response:
                 logger.info("Total files available in folder '%s' of bucket '%s': %s", folder_path, bucket_name, response)
                 files = [f"s3://{bucket_name}/{obj['Key']}" for obj in response['Contents'] if

@@ -1,23 +1,39 @@
-import os
-from resources.dev import config
-from src.main.utility.s3_client_object import *
 from src.main.utility.encrypt_decrypt import *
+from src.main.utility.s3_client_object import *
+
+# Initialize S3 Client
 s3_client_provider = S3ClientProvider(decrypt(config.aws_access_key), decrypt(config.aws_secret_key))
 s3_client = s3_client_provider.get_client()
 
-local_file_path = "C:\\Users\\nikita\\Documents\\data_engineering\\spark_data\\sales_data_to_s3\\"
-def upload_to_s3(s3_directory, s3_bucket, local_file_path):
-    s3_prefix = f"{s3_directory}"
+# Configuration Variables
+local_file_source = "/home/shreyansh-jain/PycharmProjects/MIssion_DataEngineering/upload_to_s3"
+s3_folder = config.s3_source_directory
+s3_bucket_name = config.bucket_name
+
+
+def upload_to_s3(directory, local_source, bucket):
+    """
+    Uploads files from a local directory to an S3 bucket.
+
+    :param directory: Target S3 directory (prefix)
+    :param local_source: Local directory containing files
+    :param bucket: Target S3 bucket name
+    """
+    s3_prefix = f"{directory}/" if not directory.endswith("/") else directory
+    # Ensure proper S3 prefix format
+
     try:
-        for root, dirs, files in os.walk(local_file_path):
+        for root, _, files in os.walk(local_source):
             for file in files:
-                print(file)
+                print(f"Uploading: {file}")
                 local_file_path = os.path.join(root, file)
                 s3_key = f"{s3_prefix}{file}"
-                s3_client.upload_file(local_file_path, s3_bucket, s3_key)
-    except Exception as e:
-        raise e
+                s3_client.upload_file(local_file_path, bucket, s3_key)
+                print(f"Uploaded {file} to s3://{bucket}/{s3_key}")
+    except Exception as err:
+        print(f"Error uploading to S3: {err}")
+        raise  # Re-raise exception for better debugging
 
-s3_directory = "sales_data/"
-s3_bucket = "youtube-project-testing"
-upload_to_s3(s3_directory, s3_bucket, local_file_path)
+
+# Call upload function
+upload_to_s3(s3_folder, local_file_source, s3_bucket_name)
